@@ -23,4 +23,13 @@ lab.experiment('Hello', () => {
       done()
     })
   })
+
+  lab.test.skip('Should add point', (done) => {
+    const options = { method: 'GET', url: '/add' }
+    server.inject(options, function (response) {
+      const result = response.result
+      code.expect(result).to.equal('done')
+      done()
+    })
+  })
 })
