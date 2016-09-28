@@ -15,7 +15,7 @@ lab.experiment('Hello', () => {
     })
   })
 
-  lab.test('Testing for "Hello World"', (done) => {
+  lab.test.skip('Testing for "Hello World"', (done) => {
     const options = { method: 'GET', url: '/' }
     server.inject(options, function (response) {
       const result = response.result
