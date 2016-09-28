@@ -24,8 +24,12 @@ lab.experiment('Hello', () => {
     })
   })
 
-  lab.test.skip('Should add point', (done) => {
-    const options = { method: 'GET', url: '/add' }
+  lab.test('Should add point', (done) => {
+    var expected = {
+      timestamp: new Date(),
+      value: 1.0
+    }
+    const options = { method: 'POST', url: '/add', payload: JSON.stringify(expected) }
     server.inject(options, function (response) {
       const result = response.result
       code.expect(result).to.equal('done')

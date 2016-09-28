@@ -5,6 +5,8 @@
 const Hapi = require('hapi')
 const xtend = require('xtend')
 const minimist = require('minimist')
+const memdb = require('memdb')
+
 const defaults = {
   port: 8989
 }
@@ -16,9 +18,12 @@ function build (opts, cb) {
 
   server.connection({ port: opts.port })
 
-  server.register([
-    require('./lib/myplugin')
-  ], (err) => {
+  server.register([{
+    register: require('./lib/myplugin').register,
+    options: {
+      db: memdb()
+    }
+  }], (err) => {
     cb(err, server)
   })
 
